@@ -1,12 +1,14 @@
 #include <Servo.h>
 
-#define Led A3                      // Orange
 #define LeftPositive 2              // Purple       IN1
 #define LeftNegative 4              // Green        IN2
 #define RightNegative 12            // White        IN3
 #define RightPositive 13            // Orange       IN4
 #define Trigger 7                   // Green
 #define Echo 8                      // Blue
+
+#define LeftIRSensor A0;
+#define RightIRSensor A1;
 
 Servo Griper;        // 11  Purple
 Servo Ploca;         // 10  Blue
@@ -16,9 +18,13 @@ Servo Prva_Ruka;     // 5   Orange
 
 #define RegulatedSpeed 3                  // Yellow to breadboard, purple to left, orange to right
 
+int n = 0;             // Used to determine how many times both IR sensors have been on black at the same time
+
 void setup() {
-  // Led
-  pinMode(Led, OUTPUT);
+
+  // IR Sensors
+  pinMode(LeftIRSensor, INPUT);
+  pinMode(RightIRSensor, INPUT);
 
   // Differential motors
   pinMode(LeftPositive, OUTPUT);
@@ -44,17 +50,28 @@ void setup() {
 
 void loop() {
 
-  digitalWrite(Led, LOW);
-
   NeutralPosition();
+
+  bool LeftIR = digitalRead(LeftIRSensor);         // White == 0, Black == 1;
+  bool RightIR = digitalRead(RightIRSensor);
+
+  if (LeftIR == 1 && RightIR == 1) {          // Assuming that 1 is value given on white, 0 on black. (Needs to be checked)
+    Forward(255);
+  } else if (LeftIR == 0 && RightIR == 1) {
+    Left(100);
+  } else if (LeftIR == 1 && RightIR == 0) {
+    Right(100);
+  } else if (LeftIR == 0 && RightIR == 0) {   // Both on black, needs to check n (*no of both sensors on black)
+    if (n == 0) {
+      Forward(255);
+    } else if (n == 1) {
+      // So on and so on....
+    }
+  }
 
 }
 
 // FUNCTIONS
-
-// Color Sensor
-
-    // Yet to be decided...
 
 // Gripper
 
