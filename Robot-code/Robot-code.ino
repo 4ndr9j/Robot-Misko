@@ -7,8 +7,8 @@
 #define Trigger 7                   // Green
 #define Echo 8                      // Blue
 
-#define LeftIRSensor A0;
-#define RightIRSensor A1;
+#define LeftIRSensor A1
+#define RightIRSensor A0
 
 Servo Griper;        // 11  Purple
 Servo Ploca;         // 10  Blue
@@ -16,7 +16,7 @@ Servo Treca_Ruka;    // 9   Green
 Servo Druga_Ruka;    // 6   Yellow
 Servo Prva_Ruka;     // 5   Orange
 
-#define RegulatedSpeed 3                  // Yellow to breadboard, purple to left, orange to right
+#define RegulatedSpeed 3                  // Orange to breadboard, Purple to left, Blue to right
 
 int n = 0;             // Used to determine how many times both IR sensors have been on black at the same time
 
@@ -52,23 +52,21 @@ void loop() {
 
   NeutralPosition();
 
+  
   bool LeftIR = digitalRead(LeftIRSensor);         // White == 0, Black == 1;
   bool RightIR = digitalRead(RightIRSensor);
 
   if (LeftIR == 1 && RightIR == 1) {          // Assuming that 1 is value given on white, 0 on black. (Needs to be checked)
-    Forward(255);
+    Stop();
   } else if (LeftIR == 0 && RightIR == 1) {
-    Left(100);
+    Right(120);
   } else if (LeftIR == 1 && RightIR == 0) {
-    Right(100);
+    Left(120);
   } else if (LeftIR == 0 && RightIR == 0) {   // Both on black, needs to check n (*no of both sensors on black)
-    if (n == 0) {
-      Forward(255);
-    } else if (n == 1) {
-      // So on and so on....
-    }
+    Forward(255);
   }
 
+  
 }
 
 // FUNCTIONS
