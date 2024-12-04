@@ -1,9 +1,9 @@
-#define RightSpeed 5
-#define LeftSpeed 6
-#define RightPositive 8
-#define RightNegative 9
-#define LeftNegative 10
-#define LeftPositive 11 
+#define RightSpeed 5         //  Purple
+#define LeftSpeed 6          //  Blue
+#define RightPositive 8      //  Green
+#define RightNegative 9      //  Blue
+#define LeftNegative 10      //  White
+#define LeftPositive 11      //  Orange
 
 void setup() {
   pinMode(RightSpeed, OUTPUT);
