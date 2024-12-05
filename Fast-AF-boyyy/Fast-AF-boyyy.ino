@@ -15,39 +15,46 @@ void setup() {
 
 }
 
-void loop() {  // Untested, just a sketch
-  
-  Forward(200);
+void loop() {  // Working
 
-  delay(1000);
-
-  RightOne(130);
-
-  delay(350);
-
-  Forward(150);
-
-  delay(1000);
-
-  RightOne(130);
-  
-  delay(350);
-
-  Forward(200);
+  Forward(255);
 
   delay(2500);
 
   Stop();
 
-  delay(1000);
+  delay(2000);
 
-  Backward(150);
+  Arch(255, 100);
 
-  delay(750);
+  delay(2000); //1700
+
+  Stop();
+  delay (2000);
+
+  Right(255);
+
+  delay(850);
 
   Stop();
 
-  delay(1000);
+  delay(3000);
+  
+  Forward(255);
+  delay(10000);
+
+  Stop();
+  delay(10000);
+
+}
+
+void Arch(int LSpeed, int RSpeed) {
+  digitalWrite(RightPositive, HIGH);
+  digitalWrite(RightNegative, LOW);
+  digitalWrite(LeftPositive, HIGH);
+  digitalWrite(LeftNegative, LOW);
+  analogWrite(LeftSpeed, LSpeed);
+  analogWrite(RightSpeed, RSpeed);
 
 }
 
