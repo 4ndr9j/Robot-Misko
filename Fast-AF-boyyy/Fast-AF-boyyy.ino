@@ -23,22 +23,32 @@ void loop() {  // Working
 
   Stop();
 
-  delay(2000);
+  delay(1000);
 
   Arch(255, 100);
 
   delay(2000); //1700
 
-  Stop();
-  delay (2000);
-
-  Right(255);
-
-  delay(850);
+  /*
 
   Stop();
+  delay (1000);
+  */
+  
+  Forward(200);
+  delay(300);
 
-  delay(3000);
+  Stop();
+  delay(500);
+  
+
+  Right(240);
+
+  delay(1050);    // 850
+
+  Stop();
+
+  delay(1000);
   
   Forward(255);
   delay(10000);
